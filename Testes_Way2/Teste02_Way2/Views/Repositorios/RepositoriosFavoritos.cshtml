@@ -1,0 +1,25 @@
+﻿@model List<Octokit.Repository>
+@{
+    ViewBag.Title = "RepositoriosFavoritos";
+}
+
+<h2>Repositórios Favoritos</h2>
+
+<fieldset>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var repositorio in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(@repositorio.Name, "DetalhesRepositorio", "Repositorio", new { usuario = @repositorio.Owner.Login, repositorioNome = @repositorio.Name }, new { })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</fieldset>

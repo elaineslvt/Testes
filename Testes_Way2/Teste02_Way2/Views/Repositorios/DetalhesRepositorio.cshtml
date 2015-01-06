@@ -1,0 +1,59 @@
+﻿@model Teste02_Way2.Models.DetalhesRepositorioModel
+@{
+    ViewBag.Title = "DetalhesRepositorio";
+}
+
+<h2>Detalhes do Repositório</h2>
+
+<fieldset>
+    <legend>Detalhes</legend>
+
+    <table>
+        <tbody>
+            <tr>
+                <td>Nome:</td>
+                <td>@Model.Repositorio.Name</td>
+            </tr>
+            <tr>
+                <td>Descrição:</td>
+                <td>@Model.Repositorio.Description</td>
+            </tr>
+            <tr>
+                <td>Linguagem:</td>
+                <td>@Model.Repositorio.Language</td>
+            </tr>
+            <tr>
+                <td>Ultima data de atualização:</td>
+                <td>@Model.Repositorio.UpdatedAt</td>
+            </tr>
+            <tr>
+                <td>Dono do repositório:</td>
+                <td>@Model.Repositorio.Owner.Login</td>
+            </tr>
+            <tr>
+                <td>Favorito</td>
+                <td>
+                    @Html.ActionLink(@Model.HeFavorito ? "DesmarcarFavorito" : "MarcarFavorito", "Favorito", "Repositorios", new {usuario = @Model.Repositorio.Owner.Login, repositorioNome = @Model.Repositorio.Name,  favorito = @Model.HeFavorito}, new { })
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</fieldset>
+<fieldset>
+    <legend>Colaboradores</legend>
+    <h4>Colaboradores</h4>
+    <table>
+        <tbody>
+            @if (Model.Contribuidores != null)
+            { 
+                foreach (var usuario in Model.Contribuidores)
+                {
+
+                    <tr>
+                        <td>@usuario.Login</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</fieldset>

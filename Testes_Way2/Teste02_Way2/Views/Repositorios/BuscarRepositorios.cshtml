@@ -1,0 +1,34 @@
+﻿@model List<Octokit.Repository>
+@{
+    ViewBag.Title = "BuscarRepositorios";
+}
+
+<h2>Buscar Repositórios</h2>
+
+<fieldset>
+    <legend>Buscar repositórios</legend>
+    @using (Html.BeginForm("BuscarRepositorios", "Repositorios"))
+    {
+        @Html.TextBox("nomeRepositorio")
+        <input type="submit" value="Buscar" />
+    }
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var repositorio in Model)
+                {
+                <tr>
+                    <td>@Html.ActionLink(@repositorio.Name, "DetalhesRepositorio", "Repositorios", new { usuario = @repositorio.Owner.Login, repositorioNome = @repositorio.Name }, new { })</td>
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+</fieldset>
